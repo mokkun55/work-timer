@@ -10,7 +10,7 @@ import { Form } from "@/features/input/components/form";
 
 export const Home = (): React.ReactNode => {
   return (
-    <Container size="lg" h="100vh" bg="#EAF3FD">
+    <Container size="lg" h="100vh">
       <Flex direction="column" gap="md" justify="center" align="center">
         <Grid grow>
           {/* 現在の進捗 */}
