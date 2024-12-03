@@ -18,14 +18,12 @@ export const Home = (): React.ReactNode => {
             <Grid.Col span={4}>
               <Flex direction="column" gap="md" justify="center" align="center">
                 <h2>今週の進捗</h2>
-                {/* TODO アニメーションとかいいかも */}
                 <RingProgress
                   size={300}
                   thickness={15}
                   roundCaps
                   sections={[{ value: 40, color: "blue" }]}
                   transitionDuration={700}
-                  // taは aligned center
                   label={
                     <Center>
                       <div>
@@ -56,9 +54,7 @@ export const Home = (): React.ReactNode => {
 
         {/* 記録フォーム */}
         <div>
-          <Flex direction="column" gap="md" justify="center" align="center">
-            <Form />
-          </Flex>
+          <Form />
         </div>
 
         {/* 設定画面へ */}
