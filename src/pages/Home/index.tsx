@@ -53,7 +53,13 @@ export const Home = (): React.ReactNode => {
         </Grid>
 
         {/* 記録フォーム */}
-        <div>
+        <div
+          style={{
+            width: "70%",
+            maxWidth: "1000px",
+            minWidth: "500px",
+          }}
+        >
           <Form />
         </div>
 
