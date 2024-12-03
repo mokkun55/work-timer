@@ -30,7 +30,7 @@ export const Form = (): React.ReactNode => {
   // 作業終了処理
   const handleEndWorkButtonClick = () => {
     endWork();
-    // TODO DBに時間を記録
+    // TODO DBに時間を記録 -> hooksとかで共通化
     console.log(
       `作業内容 "${workContent}" で、"${elapsedTime}" 秒 作業しました！`
     );
@@ -41,7 +41,7 @@ export const Form = (): React.ReactNode => {
   // フォーム記録の方での記録処理
   const handleSubmitButtonClick = () => {
     const time = perseTime(inputTime);
-    // TODO DBに時間を記録
+    // TODO DBに時間を記録 -> hooksとかで共通化
     console.log(`作業内容 "${workContent}" で、"${time}" 秒 作業しました！`);
     setWorkContent("");
     setInputTime("");
