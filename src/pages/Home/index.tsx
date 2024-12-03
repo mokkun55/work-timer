@@ -7,6 +7,7 @@ import {
   Input,
   RingProgress,
 } from "@mantine/core";
+import { Form } from "@/features/input/components/form";
 
 export const Home = (): React.ReactNode => {
   return (
@@ -57,12 +58,7 @@ export const Home = (): React.ReactNode => {
         {/* 記録フォーム */}
         <div>
           <Flex direction="column" gap="md" justify="center" align="center">
-            <h2>記録フォーム</h2>
-            {/* TODO 仮置き */}
-            <Input />
-            <Input />
-            <Button>完了</Button>
-            <Button>過去の記録を見る</Button>
+            <Form />
           </Flex>
         </div>
 
