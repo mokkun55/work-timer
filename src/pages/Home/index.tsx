@@ -42,10 +42,9 @@ export const Home = (): React.ReactNode => {
             {/* 最近の記録 */}
             <Grid.Col span={8}>
               <h3>今週の記録</h3>
+              {/* TODO 縦横 はみ出したら... 表示 */}
               <p>11/11(月) : 3h ホームページの制作</p>
               <p>11/12(月) : 2h コードレビュー</p>
-              <p>11/13(月) : 0.5h デザインの修正</p>
-              <p>11/13(月) : 0.5h デザインの修正</p>
               <p>11/13(月) : 0.5h デザインの修正</p>
               <p>11/13(月) : 0.5h デザインの修正</p>
               <p>11/13(月) : 0.5h デザインの修正</p>
@@ -70,9 +69,7 @@ export const Home = (): React.ReactNode => {
         {/* 設定画面へ */}
         <div>
           <Flex direction="column" gap="md" justify="center" align="center">
-            <Button variant="light" color="gray">
-              設定画面へ
-            </Button>
+            <Button variant="light">設定画面へ</Button>
           </Flex>
         </div>
       </Flex>
