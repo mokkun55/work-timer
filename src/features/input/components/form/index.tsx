@@ -51,8 +51,8 @@ export const Form = (): React.ReactNode => {
     <div>
       <Tabs variant="outline" defaultValue="oneClick">
         <Tabs.List>
-          <Tabs.Tab value="oneClick">ワンクリック記録</Tabs.Tab>
-          <Tabs.Tab value="form">フォーム記録</Tabs.Tab>
+          <Tabs.Tab value="oneClick">作業を始める</Tabs.Tab>
+          <Tabs.Tab value="form">後から記録</Tabs.Tab>
         </Tabs.List>
 
         {/* ワンクリック記録 */}
