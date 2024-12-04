@@ -1,0 +1,26 @@
+.container {
+  .title {
+    margin-bottom: 0;
+  }
+
+  height: 100%;
+  max-height: 400px;
+  width: 100%;
+  max-width: 300px;
+  overflow: hidden;
+
+  .itemList {
+    height: 300px;
+    overflow: scroll;
+
+    .item {
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
+      margin: 8px 0;
+    }
+  }
+
+  .button {
+    margin-top: 5px;
+  }
+}

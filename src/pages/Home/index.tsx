@@ -7,19 +7,20 @@ import {
   RingProgress,
 } from "@mantine/core";
 import { Form } from "@/features/input/components/form";
+import { RecodeList } from "@/features/record/list";
 
 export const Home = (): React.ReactNode => {
   return (
     <Container size="lg" h="100vh">
       <Flex direction="column" gap="md" justify="center" align="center">
-        <Grid grow>
+        <Grid grow h="400px">
           {/* 現在の進捗 */}
           <Flex direction="row">
             <Grid.Col span={4}>
               <Flex direction="column" gap="md" justify="center" align="center">
                 <h2>今週の進捗</h2>
                 <RingProgress
-                  size={300}
+                  size={250}
                   thickness={15}
                   roundCaps
                   sections={[{ value: 40, color: "blue" }]}
@@ -39,15 +40,7 @@ export const Home = (): React.ReactNode => {
 
             {/* 最近の記録 */}
             <Grid.Col span={8}>
-              <h2>今週の記録</h2>
-              {/* TODO 縦横 はみ出したら... 表示 */}
-              <p>11/11(月) : 3h ホームページの制作</p>
-              <p>11/12(月) : 2h コードレビュー</p>
-              <p>11/13(月) : 0.5h デザインの修正</p>
-              <p>11/13(月) : 0.5h デザインの修正</p>
-              <p>11/13(月) : 0.5h デザインの修正</p>
-              <p>11/13(月) : 0.5h デザインの修正</p>
-              <p>11/13(月) : 0.5h デザインの修正</p>
+              <RecodeList />
             </Grid.Col>
           </Flex>
         </Grid>
