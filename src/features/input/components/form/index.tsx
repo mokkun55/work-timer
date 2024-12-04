@@ -7,6 +7,7 @@ import useWorkContentStore from "@/store/useWorkContentStore";
 import useTimerStore from "@/store/useTimerStore";
 import { useState } from "react";
 import useTimeFormatter from "@/hooks/useTimeFormatter";
+import styles from "./index.module.scss";
 
 export const Form = (): React.ReactNode => {
   const { startWork, endWork } = useWorkStore();
@@ -48,9 +49,9 @@ export const Form = (): React.ReactNode => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Tabs variant="outline" defaultValue="oneClick">
-        <Tabs.List>
+        <Tabs.List className={styles.tabList}>
           <Tabs.Tab value="oneClick">作業を始める</Tabs.Tab>
           <Tabs.Tab value="form">後から記録</Tabs.Tab>
         </Tabs.List>
@@ -58,34 +59,34 @@ export const Form = (): React.ReactNode => {
         {/* ワンクリック記録 */}
         <Tabs.Panel value="oneClick">
           <WorkingModal onClose={handleEndWorkButtonClick} />
-          <div>
-            <BaseInput
-              label={"作業内容を入力"}
-              value={workContent}
-              onChange={(e) => setWorkContent(e.target.value)}
-              isRequired
-            />
-            <Button onClick={handleStartButtonClick}>開始</Button>
-          </div>
+          <BaseInput
+            label={"作業内容を入力"}
+            value={workContent}
+            onChange={(e) => setWorkContent(e.target.value)}
+            isRequired
+          />
+          <Button onClick={handleStartButtonClick} className={styles.button}>
+            開始
+          </Button>
         </Tabs.Panel>
 
         {/* フォーム記録 */}
         <Tabs.Panel value="form">
-          <div>
-            <BaseInput
-              label="作業内容を入力"
-              value={workContent}
-              onChange={(e) => setWorkContent(e.target.value)}
-              isRequired
-            />
-            <TimeInput
-              label="作業時間を入力"
-              withAsterisk
-              value={inputTime}
-              onChange={(e) => setInputTime(e.currentTarget.value)}
-            />
-            <Button onClick={handleSubmitButtonClick}>記録する</Button>
-          </div>
+          <BaseInput
+            label="作業内容を入力"
+            value={workContent}
+            onChange={(e) => setWorkContent(e.target.value)}
+            isRequired
+          />
+          <TimeInput
+            label="作業時間を入力"
+            withAsterisk
+            value={inputTime}
+            onChange={(e) => setInputTime(e.currentTarget.value)}
+          />
+          <Button onClick={handleSubmitButtonClick} className={styles.button}>
+            記録する
+          </Button>
         </Tabs.Panel>
       </Tabs>
     </div>
