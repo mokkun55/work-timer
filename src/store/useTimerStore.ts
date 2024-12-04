@@ -7,6 +7,7 @@ type TimerState = {
   startTimer: () => void;
   stopTimer: () => void;
   resetTimer: () => void;
+  resumeTimer: () => void; // 再開
 };
 
 const useTimerStore = create<TimerState>((set, get) => ({
@@ -29,6 +30,22 @@ const useTimerStore = create<TimerState>((set, get) => ({
         set({ elapsedTime: elapsed });
       }, 1000);
       set({ timer });
+    }
+  },
+
+  // 再開
+  resumeTimer: () => {
+    const { startTime, elapsedTime, timer } = get();
+    if (!timer && startTime) {
+      const newStartTime = Date.now() - elapsedTime * 1000;
+      set({ startTime: newStartTime });
+
+      const newTimer = setInterval(() => {
+        const currentTime = Date.now();
+        const elapsed = Math.floor((currentTime - newStartTime) / 1000);
+        set({ elapsedTime: elapsed });
+      }, 1000);
+      set({ timer: newTimer });
     }
   },
 

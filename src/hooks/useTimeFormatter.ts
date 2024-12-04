@@ -1,9 +1,15 @@
+import useTimerSettingStore from "@/store/useTimerSettingsStore";
+
+// 秒を00:00に変換
 const useTimeFormatter = () => {
-  // 秒を00:00に変換
+  const { showSeconds } = useTimerSettingStore();
   const formatTime = (second: number): string => {
     const hour = Math.floor(second / 3600);
     const min = Math.floor((second % 3600) / 60);
-    return `${hour < 10 ? "0" : ""}${hour}:${min < 10 ? "0" : ""}${min}`;
+    const sec = second % 60;
+    return `${hour < 10 ? "0" : ""}${hour}:${min < 10 ? "0" : ""}${min}${
+      showSeconds ? `:${sec < 10 ? "0" : ""}${sec}` : ""
+    }`;
   };
 
   // 00:00を秒に変換

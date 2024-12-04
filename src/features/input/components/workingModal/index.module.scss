@@ -1,7 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  background-color: #f4f9ff;
+  height: 90vh;
+  justify-content: center;
   padding: 1rem 4rem;
   border-radius: 16px;
 
@@ -19,7 +20,6 @@
       .input {
         width: 100%;
         font-size: 32px;
-        text-decoration: underline;
         border: none;
         background: none;
         outline: none;
@@ -46,5 +46,18 @@
     font-weight: bold;
     font-size: 64px;
     text-align: center;
+  }
+
+  .buttonArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+
+    .button {
+      height: 50px;
+      width: 100%;
+    }
   }
 }
