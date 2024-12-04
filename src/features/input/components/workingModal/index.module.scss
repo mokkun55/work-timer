@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f9ff;
+  padding: 1rem 4rem;
+  border-radius: 16px;
+
+  .working {
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+
+    .inputArea {
+      display: flex;
+      align-items: center;
+      width: 80%;
+
+      .input {
+        width: 100%;
+        font-size: 32px;
+        text-decoration: underline;
+        border: none;
+        background: none;
+        outline: none;
+      }
+
+      .icon {
+        color: gray;
+      }
+    }
+  }
+
+  .progressArea {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+
+    .time {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+  }
+
+  .time {
+    font-weight: bold;
+    font-size: 64px;
+    text-align: center;
+  }
+}
