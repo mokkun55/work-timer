@@ -21,7 +21,7 @@ export const Progress = (): React.ReactNode => {
             <h1 className={styles.text}>
               {completeTime}h / {goalTime}h
             </h1>
-            <h1 className={styles.text}>あと11h</h1>
+            <h1 className={styles.text}>あと{goalTime - completeTime}h</h1>
           </div>
         }
       />
