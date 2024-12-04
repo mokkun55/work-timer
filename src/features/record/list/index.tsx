@@ -25,8 +25,9 @@ export const RecodeList = (): React.ReactNode => {
     <div className={styles.container}>
       <h2 className={styles.title}>今週の記録</h2>
       <div className={styles.itemList}>
-        {mockData.map((item) => (
-          <p className={styles.item}>
+        {/* TODO キーは後々uidとかにする */}
+        {mockData.map((item, index) => (
+          <p className={styles.item} key={index}>
             {/* TODO hoursは二桁にしたい */}
             {item.date} {item.hours >= 1 ? item.hours + ".0" : item.hours}
             h&nbsp;{item.task}
