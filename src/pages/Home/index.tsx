@@ -21,6 +21,7 @@ export const Home = (): React.ReactNode => {
                 <h2>今週の進捗</h2>
                 <RingProgress
                   size={250}
+                  // TODO 厚さ変えるー？
                   thickness={15}
                   roundCaps
                   sections={[{ value: 40, color: "blue" }]}
