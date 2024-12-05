@@ -56,9 +56,11 @@ export const Root = (): React.ReactNode => {
 
         <div>
           <Button onClick={signIn}>Googleでログイン</Button>
-          <Button onClick={() => signOut(auth)} color="red">
-            ログアウト
-          </Button>
+          {auth.currentUser && (
+            <Button onClick={() => signOut(auth)} color="red">
+              ログアウト
+            </Button>
+          )}
         </div>
       </div>
     </div>
