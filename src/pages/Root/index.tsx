@@ -1,6 +1,6 @@
 import { Button } from "@mantine/core";
 import { auth, googleProvider } from "@/libs/firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
 
 export const Root = (): React.ReactNode => {
@@ -43,8 +43,22 @@ export const Root = (): React.ReactNode => {
           直感的に自分の働き具合がわかるから、どんどん頑張れちゃう。
         </div>
 
+        {/* TODO デバック用 */}
+        <div
+          style={{
+            backgroundColor: "lightgray",
+            padding: "10px",
+            margin: "10px",
+          }}
+        >
+          ログイン中のユーザー: {auth.currentUser?.email || "未ログイン"}
+        </div>
+
         <div>
           <Button onClick={signIn}>Googleでログイン</Button>
+          <Button onClick={() => signOut(auth)} color="red">
+            ログアウト
+          </Button>
         </div>
       </div>
     </div>
