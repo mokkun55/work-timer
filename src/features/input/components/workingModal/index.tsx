@@ -39,6 +39,11 @@ export const WorkingModal = ({
   };
 
   const handleCloseButtonClick = () => {
+    // TODO DBに時間を記録 -> hooksとかで共通化
+
+    // TODO デバック用 後で消す
+    console.log(`${time}秒の 作業(${workContent})を記録しました`);
+
     setTime(0);
     setIsWorking(false);
     onClose();
