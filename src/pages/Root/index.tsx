@@ -2,10 +2,10 @@ import { Button } from "@mantine/core";
 import { auth, googleProvider } from "@/libs/firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { useAuth } from "@/providers/AuthProvider";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 export const Root = (): React.ReactNode => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { currentUser } = useAuth();
 
   const signInWithGoogle = async () => {
@@ -18,7 +18,7 @@ export const Root = (): React.ReactNode => {
 
   const handleSignClick = async () => {
     await signInWithGoogle();
-    // navigate("/home");
+    navigate("/home");
   };
 
   const handleSignOutClick = async () => {
@@ -61,11 +61,15 @@ export const Root = (): React.ReactNode => {
         </div>
 
         <div>
-          <Button onClick={handleSignClick}>Googleでログイン</Button>
+          {!currentUser && (
+            <Button onClick={handleSignClick}>Googleでログイン</Button>
+          )}
           {currentUser && (
-            <Button onClick={handleSignOutClick} color="red">
-              ログアウト
-            </Button>
+            <>
+              <Button onClick={handleSignOutClick} color="red">
+                ログアウト
+              </Button>
+            </>
           )}
         </div>
       </div>
