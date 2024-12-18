@@ -6,6 +6,7 @@ import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 
 createRoot(document.getElementById("root")!).render(
+  // TODO ここにプロバイダーもたせる or Provider.tsxみたいな所に集約
   <StrictMode>
     <MantineProvider>
       <Router />

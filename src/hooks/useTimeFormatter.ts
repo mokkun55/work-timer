@@ -1,9 +1,6 @@
-import useTimerSettingStore from "@/store/useTimerSettingsStore";
-
-// 秒を00:00に変換
+// 秒を00:00に変換 第2引数にtrueを渡すと秒も表示
 const useTimeFormatter = () => {
-  const { showSeconds } = useTimerSettingStore();
-  const formatTime = (second: number): string => {
+  const formatTime = (second: number, showSeconds: boolean = false): string => {
     const hour = Math.floor(second / 3600);
     const min = Math.floor((second % 3600) / 60);
     const sec = second % 60;

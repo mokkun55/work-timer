@@ -1,21 +1,17 @@
 import { Button, Tabs } from "@mantine/core";
 import { TimeInput } from "@mantine/dates";
-import { WorkingModal } from "../workingModal";
 import { BaseInput } from "@/components/baseInput";
-import useWorkStore from "@/store/useWorkStore";
-import useWorkContentStore from "@/store/useWorkContentStore";
-import useTimerStore from "@/store/useTimerStore";
 import { useState } from "react";
-import useTimeFormatter from "@/hooks/useTimeFormatter";
+// import useTimeFormatter from "@/hooks/useTimeFormatter";
 import styles from "./index.module.scss";
+import { WorkingModal } from "../workingModal";
+import useTimeFormatter from "@/hooks/useTimeFormatter";
 
 export const Form = (): React.ReactNode => {
-  const { startWork, endWork } = useWorkStore();
-  const { workContent, setWorkContent } = useWorkContentStore();
-  const { startTimer, resetTimer, elapsedTime } = useTimerStore();
   const { perseTime } = useTimeFormatter();
-
   const [inputTime, setInputTime] = useState<string>("");
+  const [workContent, setWorkContent] = useState<string>("");
+  const [isWorking, setIsWorking] = useState<boolean>(false);
 
   // 作業開始処理
   const handleStartButtonClick = () => {
@@ -24,27 +20,31 @@ export const Form = (): React.ReactNode => {
       alert("作業内容を入力してください");
       return;
     }
-    startWork();
-    startTimer();
-  };
 
-  // 作業終了処理
-  const handleEndWorkButtonClick = () => {
-    endWork();
-    // TODO DBに時間を記録 -> hooksとかで共通化
-    console.log(
-      `作業内容 "${workContent}" で、"${elapsedTime}" 秒 作業しました！`
-    );
-    resetTimer();
-    setWorkContent("");
+    setIsWorking(true);
   };
 
   // フォーム記録の方での記録処理
   const handleSubmitButtonClick = () => {
-    const time = perseTime(inputTime);
+    if (!workContent) {
+      alert("作業内容を入力してください");
+      return;
+    }
+
+    if (!inputTime) {
+      alert("作業時間を入力してください");
+      return;
+    }
+
     // TODO DBに時間を記録 -> hooksとかで共通化
-    console.log(`作業内容 "${workContent}" で、"${time}" 秒 作業しました！`);
-    setWorkContent("");
+
+    // TODO デバック用 後で消す
+    console.log(
+      `${inputTime} (${perseTime(
+        inputTime
+      )}秒)の 作業(${workContent})を記録しました`
+    );
+
     setInputTime("");
   };
 
@@ -58,35 +58,54 @@ export const Form = (): React.ReactNode => {
 
         {/* ワンクリック記録 */}
         <Tabs.Panel value="oneClick">
-          <WorkingModal onClose={handleEndWorkButtonClick} />
-          <BaseInput
-            label={"作業内容を入力"}
-            value={workContent}
-            onChange={(e) => setWorkContent(e.target.value)}
-            isRequired
+          <WorkingModal
+            onClose={close}
+            isWorking={isWorking}
+            setIsWorking={setIsWorking}
+            workContent={workContent}
           />
-          <Button onClick={handleStartButtonClick} className={styles.button}>
-            開始
-          </Button>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleStartButtonClick();
+            }}
+          >
+            <BaseInput
+              label={"作業内容を入力"}
+              value={workContent}
+              onChange={(e) => setWorkContent(e.target.value)}
+              isRequired
+            />
+            <Button type="submit" className={styles.button}>
+              開始
+            </Button>
+          </form>
         </Tabs.Panel>
 
         {/* フォーム記録 */}
         <Tabs.Panel value="form">
-          <BaseInput
-            label="作業内容を入力"
-            value={workContent}
-            onChange={(e) => setWorkContent(e.target.value)}
-            isRequired
-          />
-          <TimeInput
-            label="作業時間を入力"
-            withAsterisk
-            value={inputTime}
-            onChange={(e) => setInputTime(e.currentTarget.value)}
-          />
-          <Button onClick={handleSubmitButtonClick} className={styles.button}>
-            記録する
-          </Button>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmitButtonClick();
+            }}
+          >
+            <BaseInput
+              label="作業内容を入力"
+              value={workContent}
+              onChange={(e) => setWorkContent(e.target.value)}
+              isRequired
+            />
+            <TimeInput
+              label="作業時間を入力"
+              withAsterisk
+              value={inputTime}
+              onChange={(e) => setInputTime(e.currentTarget.value)}
+            />
+            <Button type="submit" className={styles.button}>
+              記録する
+            </Button>
+          </form>
         </Tabs.Panel>
       </Tabs>
     </div>
