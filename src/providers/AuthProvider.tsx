@@ -1,3 +1,4 @@
+import { Loading } from "@/components/loading";
 import { auth } from "@/libs/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -26,8 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider value={{ currentUser, loading }}>
-      {/* TODO ローディングページ作る */}
-      {loading ? <p>Loading...</p> : children}
+      {loading ? <Loading /> : children}
     </AuthContext.Provider>
   );
 };

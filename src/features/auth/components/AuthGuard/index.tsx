@@ -1,6 +1,7 @@
 // AuthGuard は認証されているかどうかをチェックし、認証されていない場合はリダイレクトします。
 // AuthGuard をつけるには<AuthGuard>タグで囲む
 
+import { Loading } from "@/components/loading";
 import { useAuth } from "@/providers/AuthProvider";
 import React from "react";
 import { Navigate } from "react-router";
@@ -15,8 +16,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children, fallback = "/" }) => {
 
   if (loading) {
     // ローディング中の状態を表示
-    // TODO 後でローディング用のページ作る
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (!currentUser) {
