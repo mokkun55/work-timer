@@ -1,38 +1,56 @@
-import useTimeFormatter from "@/hooks/useTimeFormatter";
-import useTimerStore from "@/store/useTimerStore";
-import useWorkContentStore from "@/store/useWorkContentStore";
-import useWorkStore from "@/store/useWorkStore";
+// import useTimeFormatter from "@/hooks/useTimeFormatter";
 import { Button, Container, FocusTrap, Modal, Progress } from "@mantine/core";
 import styles from "./index.module.scss";
 import { MdModeEdit } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useTimeFormatter from "@/hooks/useTimeFormatter";
 
 type Props = {
   onClose: () => void;
+  isWorking: boolean;
+  setIsWorking: (isWorking: boolean) => void;
+  workContent: string;
 };
 
-export const WorkingModal = ({ onClose }: Props): React.ReactNode => {
-  const { isWorking } = useWorkStore();
-  const { workContent } = useWorkContentStore();
-  const { elapsedTime, stopTimer, resumeTimer } = useTimerStore();
-  const { formatTime } = useTimeFormatter();
+export const WorkingModal = ({
+  onClose,
+  isWorking,
+  setIsWorking,
+  workContent,
+}: Props): React.ReactNode => {
   const [isBreak, setIsBreak] = useState<boolean>(false);
+  // 時間は秒で扱う
+  const { formatTime } = useTimeFormatter();
+  const [time, setTime] = useState<number>(0);
 
-  const handleBreakButtonClick = () => {
-    if (!isBreak) {
-      stopTimer();
-    } else {
-      resumeTimer();
+  useEffect(() => {
+    if (isWorking && !isBreak) {
+      const interval = setInterval(() => {
+        setTime((prev) => prev + 1);
+      }, 1000);
+
+      return () => clearInterval(interval);
     }
+  }, [isWorking, isBreak]);
+
+  // 休憩ボタンが押されたとき
+  const handleBreakButtonClick = () => {
     setIsBreak(!isBreak);
   };
 
   const handleCloseButtonClick = () => {
+    // TODO DBに時間を記録 -> hooksとかで共通化
+
+    // TODO デバック用 後で消す
+    console.log(`${time}秒の 作業(${workContent})を記録しました`);
+
+    setTime(0);
+    setIsWorking(false);
     onClose();
     setIsBreak(false);
   };
 
-  // ページを離れようとすると警告
+  // TODO ページを離れようとすると警告
   if (isWorking) {
     window.onbeforeunload = () => true;
   } else {
@@ -68,7 +86,7 @@ export const WorkingModal = ({ onClose }: Props): React.ReactNode => {
         </div>
         <Progress value={40} size="xl" radius="xl" />
 
-        <p className={styles.time}>{formatTime(elapsedTime)}</p>
+        <p className={styles.time}>{formatTime(time, true)}</p>
 
         <div className={styles.buttonArea}>
           <Button

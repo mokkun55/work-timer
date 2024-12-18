@@ -7,6 +7,7 @@ import "@mantine/core/styles.css";
 import { AuthProvider } from "./providers/AuthProvider";
 
 createRoot(document.getElementById("root")!).render(
+  // TODO ここにプロバイダーもたせる or Provider.tsxみたいな所に集約
   <StrictMode>
     <MantineProvider>
       <AuthProvider>
