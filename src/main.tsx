@@ -4,11 +4,14 @@ import { createRoot } from "react-dom/client";
 import { Router } from "./router/Route";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
+import { AuthProvider } from "./providers/AuthProvider";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <MantineProvider>
-      <Router />
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
     </MantineProvider>
   </StrictMode>
 );

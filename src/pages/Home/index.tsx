@@ -2,7 +2,7 @@ import { Button, Container, Flex, Grid } from "@mantine/core";
 import { Form } from "@/features/input/components/form";
 import { RecodeList } from "@/features/record/list";
 import { Progress } from "@/features/progress";
-import { AuthGuard } from "@/features/auth/components/AuthGuard";
+import AuthGuard from "@/features/auth/components/AuthGuard";
 
 export const Home = (): React.ReactNode => {
   return (
