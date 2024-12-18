@@ -1,0 +1,48 @@
+.header {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: #ddd solid 1px;
+  position: sticky;
+  background-color: #ffffff99;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(16px);
+  z-index: 999;
+  top: 0;
+  
+  .title {
+    margin: 0;
+  }
+}
+.container {
+  .topText {
+    text-align: center;
+    .title {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    .description {
+      margin-top: 0;
+      color: #222;
+    }
+  }
+
+  .buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    & > * {
+      width: 100%;
+      max-width: 150px;
+    }
+  }
+
+  .service {
+    margin-top: 50px;
+    text-align: center;
+  }
+}
