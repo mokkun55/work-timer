@@ -1,9 +1,4 @@
 .card {
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
   display: flex;
   flex-direction: column;
 
@@ -15,5 +10,9 @@
   .description {
     font-size: 1rem;
     color: #444;
+  }
+  
+  & > * {
+    margin: 0;
   }
 }
