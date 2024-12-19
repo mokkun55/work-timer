@@ -1,5 +1,5 @@
 .header {
-  padding: 0 16px;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,7 +10,7 @@
   backdrop-filter: blur(16px);
   z-index: 999;
   top: 0;
-  
+
   .title {
     margin: 0;
   }
@@ -42,7 +42,7 @@
   }
 
   .service {
-    margin-top: 50px;
+    margin-top: 32px;
     text-align: center;
   }
 }
