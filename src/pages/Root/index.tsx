@@ -22,7 +22,6 @@ export const Root = () => {
     } catch (e) {
       console.log("error", e);
     }
-
   };
   const handleSignClick = async () => {
     if (currentUser) {
@@ -32,7 +31,7 @@ export const Root = () => {
     await signInWithGoogle();
     navigate("/home");
   };
-  
+
   return (
     <div>
       {/* ヘッダー */}
@@ -65,8 +64,9 @@ export const Root = () => {
           <Button rightSection={<FaArrowRight />} onClick={handleSignClick}>
             今すぐ始める
           </Button>
-          {/* TODO 後でどっかに飛ばす？？ */}
-          <Button variant="outline">詳しく見る</Button>
+          {/* TODO 後で飛ばす？？ */}
+          {/* ゲストモード的なのを作ってみたい */}
+          <Button variant="outline">試してみる</Button>
         </div>
 
         <h1 className={styles.service}>サービスの紹介</h1>
