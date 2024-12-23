@@ -39,19 +39,13 @@ export const Form = (): React.ReactNode => {
       return;
     }
 
-    // TODO DBに時間を記録 -> hooksとかで共通化
     writeRecordTime({
       content: workContent,
       duration: perseTime(inputTime),
       week: getNowWeekNumber(),
     });
 
-    // TODO デバック用 後で消す
-    console.log(
-      `${inputTime} (${perseTime(
-        inputTime
-      )}秒)の 作業(${workContent})を記録しました`
-    );
+    // TODO トーストで完了みたいな表示がほしい
 
     setInputTime("");
   };

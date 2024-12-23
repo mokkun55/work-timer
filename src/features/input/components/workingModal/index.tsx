@@ -4,6 +4,8 @@ import styles from "./index.module.scss";
 import { MdModeEdit } from "react-icons/md";
 import { useEffect, useState } from "react";
 import useTimeFormatter from "@/hooks/useTimeFormatter";
+import { useRecordWorkTime } from "@/hooks/useRecordWorkTime";
+import { useWeekNumber } from "@/hooks/useWeekNumber";
 
 type Props = {
   onClose: () => void;
@@ -22,6 +24,8 @@ export const WorkingModal = ({
   // 時間は秒で扱う
   const { formatTime } = useTimeFormatter();
   const [time, setTime] = useState<number>(0);
+  const { writeRecordTime } = useRecordWorkTime();
+  const { getNowWeekNumber } = useWeekNumber();
 
   useEffect(() => {
     if (isWorking && !isBreak) {
@@ -40,9 +44,13 @@ export const WorkingModal = ({
 
   const handleCloseButtonClick = () => {
     // TODO DBに時間を記録 -> hooksとかで共通化
+    writeRecordTime({
+      content: workContent,
+      duration: time,
+      week: getNowWeekNumber(),
+    });
 
-    // TODO デバック用 後で消す
-    console.log(`${time}秒の 作業(${workContent})を記録しました`);
+    // TODO トーストで完了みたいな表示がほしい
 
     setTime(0);
     setIsWorking(false);
