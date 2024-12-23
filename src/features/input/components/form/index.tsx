@@ -2,16 +2,19 @@ import { Button, Tabs } from "@mantine/core";
 import { TimeInput } from "@mantine/dates";
 import { BaseInput } from "@/components/baseInput";
 import { useState } from "react";
-// import useTimeFormatter from "@/hooks/useTimeFormatter";
 import styles from "./index.module.scss";
 import { WorkingModal } from "../workingModal";
 import useTimeFormatter from "@/hooks/useTimeFormatter";
+import { useRecordWorkTime } from "@/hooks/useRecordWorkTime";
+import { useWeekNumber } from "@/hooks/useWeekNumber";
 
 export const Form = (): React.ReactNode => {
   const { perseTime } = useTimeFormatter();
   const [inputTime, setInputTime] = useState<string>("");
   const [workContent, setWorkContent] = useState<string>("");
   const [isWorking, setIsWorking] = useState<boolean>(false);
+  const { writeRecordTime } = useRecordWorkTime();
+  const { getNowWeekNumber } = useWeekNumber();
 
   // 作業開始処理
   const handleStartButtonClick = () => {
@@ -37,6 +40,11 @@ export const Form = (): React.ReactNode => {
     }
 
     // TODO DBに時間を記録 -> hooksとかで共通化
+    writeRecordTime({
+      content: workContent,
+      duration: perseTime(inputTime),
+      week: getNowWeekNumber(),
+    });
 
     // TODO デバック用 後で消す
     console.log(
