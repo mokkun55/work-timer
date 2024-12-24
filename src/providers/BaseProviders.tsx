@@ -9,7 +9,7 @@ export const BaseProviders = (): React.ReactNode => {
     <StrictMode>
       <MantineProvider>
         <AuthProvider>
-          <Toaster position="top-right" reverseOrder={true} />
+          <Toaster position="top-right" reverseOrder={false} />
           <Router />
         </AuthProvider>
       </MantineProvider>
