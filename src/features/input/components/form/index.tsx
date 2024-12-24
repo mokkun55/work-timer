@@ -50,6 +50,7 @@ export const Form = (): React.ReactNode => {
     });
 
     setInputTime("");
+    setWorkContent("");
   };
 
   return (
