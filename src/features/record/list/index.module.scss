@@ -14,6 +14,8 @@
     overflow: scroll;
 
     .item {
+      text-decoration: none;
+      color: black;
       text-wrap: nowrap;
       text-overflow: ellipsis;
       margin: 8px 0;
