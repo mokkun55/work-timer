@@ -1,6 +1,7 @@
 import { db } from "@/libs/firebase";
 import { useAuth } from "@/providers/AuthProvider";
 import { addDoc, collection } from "firebase/firestore";
+import toast from "react-hot-toast";
 
 export const useRecordWorkTime = () => {
   type RecordTime = {
@@ -12,8 +13,7 @@ export const useRecordWorkTime = () => {
 
   const writeRecordTime = async ({ content, duration, week }: RecordTime) => {
     if (!currentUser) {
-      // TODO 後でトーストにしたい
-      console.error("ログインしていません");
+      toast.error("ログインしてください");
       return;
     }
     const userId = currentUser.uid;
@@ -25,11 +25,11 @@ export const useRecordWorkTime = () => {
         createdAt: new Date(),
         week,
       });
-      // TODO 後でトーストにしたい
-      console.log("Document written with ID: ", docRef.id);
+      // TODO デバック用後で消す
+      console.log("作業を記録しました id:: ", docRef.id);
     } catch (e) {
       // こちらも
-      console.error("Error adding document: ", e);
+      console.error("作業記録中にエラーが発生しました: ", e);
     }
   };
 

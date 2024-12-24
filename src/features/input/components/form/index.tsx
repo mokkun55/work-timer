@@ -7,6 +7,7 @@ import { WorkingModal } from "../workingModal";
 import useTimeFormatter from "@/hooks/useTimeFormatter";
 import { useRecordWorkTime } from "@/hooks/useRecordWorkTime";
 import { useWeekNumber } from "@/hooks/useWeekNumber";
+import toast from "react-hot-toast";
 
 export const Form = (): React.ReactNode => {
   const { perseTime } = useTimeFormatter();
@@ -18,9 +19,8 @@ export const Form = (): React.ReactNode => {
 
   // 作業開始処理
   const handleStartButtonClick = () => {
-    // TODO 後々トーストにしたい
     if (!workContent) {
-      alert("作業内容を入力してください");
+      toast.error("作業内容を入力してください");
       return;
     }
 
@@ -30,12 +30,12 @@ export const Form = (): React.ReactNode => {
   // フォーム記録の方での記録処理
   const handleSubmitButtonClick = () => {
     if (!workContent) {
-      alert("作業内容を入力してください");
+      toast.error("作業内容を入力してください");
       return;
     }
 
     if (!inputTime) {
-      alert("作業時間を入力してください");
+      toast.error("作業時間を入力してください");
       return;
     }
 
@@ -45,7 +45,9 @@ export const Form = (): React.ReactNode => {
       week: getNowWeekNumber(),
     });
 
-    // TODO トーストで完了みたいな表示がほしい
+    toast("作業を記録しました", {
+      icon: "🎉",
+    });
 
     setInputTime("");
   };

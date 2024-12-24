@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import useTimeFormatter from "@/hooks/useTimeFormatter";
 import { useRecordWorkTime } from "@/hooks/useRecordWorkTime";
 import { useWeekNumber } from "@/hooks/useWeekNumber";
+import toast from "react-hot-toast";
 
 type Props = {
   onClose: () => void;
@@ -43,14 +44,15 @@ export const WorkingModal = ({
   };
 
   const handleCloseButtonClick = () => {
-    // TODO DBに時間を記録 -> hooksとかで共通化
     writeRecordTime({
       content: workContent,
       duration: time,
       week: getNowWeekNumber(),
     });
 
-    // TODO トーストで完了みたいな表示がほしい
+    toast("記録しました", {
+      icon: "🎉",
+    });
 
     setTime(0);
     setIsWorking(false);
