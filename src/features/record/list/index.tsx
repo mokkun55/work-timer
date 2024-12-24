@@ -13,6 +13,7 @@ export const RecodeList = (): React.ReactNode => {
 
   const fetchSessions = async () => {
     const sessions = await getWorkingSessions();
+    if (!sessions) return;
     setWorkSessions(sessions);
   };
   useEffect(() => {
@@ -21,9 +22,7 @@ export const RecodeList = (): React.ReactNode => {
   }, []);
 
   // TODO スケルトンとかいれたいねー
-  if (!workSessions) {
-    return;
-  }
+  if (!workSessions) return;
 
   return (
     <div className={styles.container}>
