@@ -1,16 +1,20 @@
 import { Button } from "@mantine/core";
 import styles from "./index.module.scss";
 import { useEffect, useState } from "react";
-import { useWorkingSessions } from "@/hooks/useGetWorkingSessions";
+import { useGetWorkingSessions } from "@/hooks/useGetWorkingSessions";
 import { WorkSession } from "@/types/workSession";
 import dayjs from "dayjs";
 // TODO 全体でdayjs 日本語にしたい
-import "dayjs/locale/ja";
-dayjs.locale("ja");
+
+import { useNavigate } from "react-router";
+import useTimeFormatter from "@/hooks/useTimeFormatter";
 
 export const RecodeList = (): React.ReactNode => {
-  const { getThisWeekWorkingSessions } = useWorkingSessions();
+  const navigate = useNavigate();
+
+  const { getThisWeekWorkingSessions } = useGetWorkingSessions();
   const [workSessions, setWorkSessions] = useState<WorkSession[] | null>(null);
+  const { formatHour } = useTimeFormatter();
 
   const fetchSessions = async () => {
     const sessions = await getThisWeekWorkingSessions();
@@ -36,8 +40,7 @@ export const RecodeList = (): React.ReactNode => {
           workSessions.map((item: WorkSession) => (
             <p className={styles.item} key={item.id}>
               {dayjs(item.createdAt.toDate()).format("YYYY/MM/DD")}&nbsp;
-              {(item.duration / 3600).toFixed(1)}
-              h&nbsp;{item.content}
+              {formatHour(item.duration)}h&nbsp;{item.content}
             </p>
           ))
         ) : (
@@ -49,6 +52,7 @@ export const RecodeList = (): React.ReactNode => {
         className={styles.button}
         onClick={() => {
           // TODO 記録一覧へ移動
+          navigate("/history");
         }}
       >
         過去の記録一覧

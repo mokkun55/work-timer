@@ -9,13 +9,19 @@ const useTimeFormatter = () => {
     }`;
   };
 
+  // 秒を X.X に変換
+  const formatHour = (second: number): string => {
+    const hour = second / 3600;
+    return `${hour.toFixed(1)}`;
+  };
+
   // 00:00を秒に変換
   const perseTime = (time: string): number => {
     const [hour, min] = time.split(":").map(Number);
     return hour * 3600 + min * 60;
   };
 
-  return { formatTime, perseTime };
+  return { formatTime, formatHour, perseTime };
 };
 
 export default useTimeFormatter;

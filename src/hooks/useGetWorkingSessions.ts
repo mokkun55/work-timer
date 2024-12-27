@@ -1,24 +1,35 @@
 import { db } from "@/libs/firebase";
 import { useAuth } from "@/providers/AuthProvider";
 import { WorkSession } from "@/types/workSession";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  where,
+  limit as firestoreLimit, // なんか競合起こしているので別名import
+} from "firebase/firestore";
 import { useWeekNumber } from "./useWeekNumber";
 
-export const useWorkingSessions = () => {
+export const useGetWorkingSessions = () => {
   const { currentUser } = useAuth();
   const { getNowWeekNumber } = useWeekNumber();
 
   // すべての作業記録を取得してそれを返す
-  const getAllWorkingSessions = async (): Promise<
-    WorkSession[] | undefined
-  > => {
+  const getAllWorkingSessions = async (
+    limit: number = 30
+  ): Promise<WorkSession[] | undefined> => {
     try {
       if (!currentUser) {
         console.error("ログインしてください");
         return;
       }
       const docRef = collection(db, `users/${currentUser.uid}/work_sessions`);
-      const q = query(docRef, orderBy("createdAt", "desc"));
+      const q = query(
+        docRef,
+        orderBy("createdAt", "desc"),
+        firestoreLimit(limit)
+      );
       const querySnapshot = await getDocs(q);
       const workSessions: WorkSession[] = querySnapshot.docs.map((doc) => {
         const data = doc.data();
