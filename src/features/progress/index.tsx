@@ -13,7 +13,9 @@ export const Progress = (): React.ReactNode => {
   const fetchTimes = async () => {
     const goalTime = await getGoalTime();
     const totalTime = await getThisWeekTotalDuration();
-    if (!goalTime || !totalTime) return;
+    // TODO 後で消す
+    console.log(goalTime, totalTime);
+    if (goalTime == null || totalTime == null) return;
     setGoalTime(goalTime); // 目標時間は時間で保存されている
     setCompleteTime(parseFloat((totalTime / 3600).toFixed(1))); // 完了時間は秒で保存されている <- 時間に変換
   };
@@ -24,8 +26,9 @@ export const Progress = (): React.ReactNode => {
   }, []);
 
   // TODO goalTimeがnullの場合はスケルトンとか表示したい
-  if (!goalTime || !completeTime) return null;
+  if (goalTime == null || completeTime == null) return null;
   const percent = parseFloat(((completeTime / goalTime) * 100).toFixed(0));
+  const remainingTime = parseFloat((goalTime - completeTime).toFixed(2));
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>今週の進捗</h2>
@@ -41,13 +44,11 @@ export const Progress = (): React.ReactNode => {
               {completeTime}h / {goalTime}h
             </h1>
             <h1 className={styles.text}>
-              {goalTime &&
-                `あと${parseFloat((goalTime - completeTime).toFixed(2))}h`}
+              {remainingTime > 0 ? `あと${remainingTime}時間` : "目標達成！"}
             </h1>
           </div>
         }
       />
-      <h1 className={styles.percent}>{percent}%</h1>
     </div>
   );
 };
