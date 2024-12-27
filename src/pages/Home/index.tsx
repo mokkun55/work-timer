@@ -3,8 +3,10 @@ import { Form } from "@/features/input/components/form";
 import { RecodeList } from "@/features/record/list";
 import { Progress } from "@/features/progress";
 import AuthGuard from "@/features/auth/components/AuthGuard";
+import { useNavigate } from "react-router";
 
 export const Home = (): React.ReactNode => {
+  const navigate = useNavigate();
   return (
     <AuthGuard>
       <Container size="lg" h="100vh">
@@ -32,6 +34,19 @@ export const Home = (): React.ReactNode => {
           <div>
             <Flex direction="column" gap="md" justify="center" align="center">
               <Button variant="light">設定画面へ</Button>
+            </Flex>
+          </div>
+
+          {/* 開発画面へ */}
+          <div>
+            <Flex direction="column" gap="md" justify="center" align="center">
+              <Button
+                variant="light"
+                color="red"
+                onClick={() => navigate("/dev")}
+              >
+                開発画面へ
+              </Button>
             </Flex>
           </div>
         </Flex>
