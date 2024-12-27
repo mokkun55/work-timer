@@ -1,11 +1,11 @@
 import { RingProgress } from "@mantine/core";
 import styles from "./index.module.scss";
-import { useGetUserSettings } from "@/hooks/useGetUserSettings";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import { useEffect, useState } from "react";
 import { useWorkingSessions } from "@/hooks/useGetWorkingSessions";
 
 export const Progress = (): React.ReactNode => {
-  const { getGoalTime } = useGetUserSettings();
+  const { getGoalTime } = useUserSettings();
   const [goalTime, setGoalTime] = useState<number>();
   const { getThisWeekTotalDuration } = useWorkingSessions();
   const [completeTime, setCompleteTime] = useState<number>();

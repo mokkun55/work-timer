@@ -33,7 +33,9 @@ export const Home = (): React.ReactNode => {
           {/* 設定画面へ */}
           <div>
             <Flex direction="column" gap="md" justify="center" align="center">
-              <Button variant="light">設定画面へ</Button>
+              <Button variant="light" onClick={() => navigate("/setting")}>
+                設定画面へ
+              </Button>
             </Flex>
           </div>
 
