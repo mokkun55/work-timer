@@ -8,11 +8,11 @@ import "dayjs/locale/ja";
 dayjs.locale("ja");
 
 export const RecodeList = (): React.ReactNode => {
-  const { getWorkingSessions } = useWorkingSessions();
+  const { getThisWeekWorkingSessions } = useWorkingSessions();
   const [workSessions, setWorkSessions] = useState<WorkSession[] | null>(null);
 
   const fetchSessions = async () => {
-    const sessions = await getWorkingSessions();
+    const sessions = await getThisWeekWorkingSessions();
     if (!sessions) return;
     setWorkSessions(sessions);
   };
