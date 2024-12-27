@@ -1,10 +1,11 @@
 // TODO 開発用 後で消す！
 
-import { Button, Container } from "@mantine/core";
+import { Button } from "@mantine/core";
 import styles from "./index.module.scss";
 import { useAuth } from "@/providers/AuthProvider";
 import { useDeleteData } from "./hooks/useDeleteData";
 import toast from "react-hot-toast";
+import { BaseLayout } from "@/Layouts/BaseLayout";
 
 export const Dev = (): React.ReactNode => {
   const { currentUser } = useAuth();
@@ -34,7 +35,7 @@ export const Dev = (): React.ReactNode => {
     }
   };
   return (
-    <Container size={"sm"} className={styles.container}>
+    <BaseLayout>
       <h1>開発用ページ</h1>
       <div>
         <h2>ログイン情報</h2>
@@ -60,6 +61,6 @@ export const Dev = (): React.ReactNode => {
           </Button>
         </div>
       )}
-    </Container>
+    </BaseLayout>
   );
 };
