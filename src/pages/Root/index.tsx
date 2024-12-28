@@ -9,20 +9,13 @@ import { BsFileEarmarkBarGraph } from "react-icons/bs";
 import { FaRegLightbulb } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useAuth } from "@/providers/AuthProvider";
-import { signInWithPopup, signOut } from "firebase/auth";
-import { auth, googleProvider } from "@/libs/firebase";
+import { useSignIn } from "./hooks/useSignIn";
 
 export const Root = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+  const { signInWithGoogle, logOut } = useSignIn();
 
-  const signInWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-    } catch (e) {
-      console.log("error", e);
-    }
-  };
   const handleSignClick = async () => {
     if (currentUser) {
       navigate("/home");
@@ -42,7 +35,7 @@ export const Root = () => {
             ログイン
           </Button>
         ) : (
-          <Button variant="outline" color="red" onClick={() => signOut(auth)}>
+          <Button variant="outline" color="red" onClick={logOut}>
             ログアウト
           </Button>
         )}
