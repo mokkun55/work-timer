@@ -6,13 +6,15 @@ import { WorkSession } from "@/types/workSession";
 import { Table } from "@mantine/core";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import styles from "./index.module.scss";
 
 export const History = (): React.ReactNode => {
   const { getAllWorkingSessions } = useGetWorkingSessions();
   const [data, setData] = useState<WorkSession[]>([]);
   const { formatHour } = useTimeFormatter();
+
   // 作業記録を取得
-  const fetchWorkingSessions = async () => {
+  const fetchWorkingSessions = async (): Promise<void> => {
     try {
       const data = await getAllWorkingSessions(15);
       if (!data) {
@@ -35,13 +37,13 @@ export const History = (): React.ReactNode => {
         <h1>過去の記録</h1>
 
         {/* テーブル */}
-        <Table striped highlightOnHover>
+        <Table highlightOnHover className={styles.table}>
           <Table.Thead>
             {/* ヘッダー */}
             <Table.Tr>
-              <Table.Th>日時</Table.Th>
-              <Table.Th>時間</Table.Th>
-              <Table.Th>内容</Table.Th>
+              <Table.Th className={styles.dateAndTime}>日時</Table.Th>
+              <Table.Th className={styles.workTime}>時間</Table.Th>
+              <Table.Th className={styles.content}>内容</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
@@ -50,7 +52,9 @@ export const History = (): React.ReactNode => {
             {data.map((data) => (
               <Table.Tr key={data.id}>
                 <Table.Td>
-                  {dayjs(data.createdAt.toDate()).format("YYYY/MM/DD HH時mm分")}
+                  {dayjs(data.createdAt.toDate()).format(
+                    "YYYY/MM/DD(dd) HH時mm分"
+                  )}
                 </Table.Td>
                 <Table.Td>{formatHour(data.duration)}h</Table.Td>
                 <Table.Td>{data.content}</Table.Td>
@@ -58,6 +62,8 @@ export const History = (): React.ReactNode => {
             ))}
           </Table.Tbody>
         </Table>
+
+        {/* TODO ページネーション */}
       </BaseLayout>
     </AuthGuard>
   );
