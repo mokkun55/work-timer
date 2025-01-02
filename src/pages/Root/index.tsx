@@ -57,7 +57,6 @@ export const Root = () => {
           <Button rightSection={<FaArrowRight />} onClick={handleSignClick}>
             今すぐ始める
           </Button>
-          {/* TODO 後で飛ばす？？ */}
           {/* ゲストモード的なのを作ってみたい */}
           <Button variant="outline">試してみる</Button>
         </div>

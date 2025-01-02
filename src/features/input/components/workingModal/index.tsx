@@ -60,7 +60,6 @@ export const WorkingModal = ({
     setIsBreak(false);
   };
 
-  // TODO ページを離れようとすると警告
   if (isWorking) {
     window.onbeforeunload = () => true;
   } else {
@@ -89,7 +88,6 @@ export const WorkingModal = ({
             <MdModeEdit className={styles.icon} />
           </div>
         </div>
-        {/* TODO 円の中今はモック */}
         <div className={styles.progressArea}>
           <h2 className={styles.title}>今週の進捗</h2>
           <p className={styles.time}>11h / 16h</p>

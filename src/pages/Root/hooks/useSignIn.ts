@@ -24,18 +24,19 @@ export const useSignIn = () => {
 
       toast.success("ログインしました");
     } catch (e) {
-      toast.error("ログインに失敗しました");
+      toast.error(`ログインに失敗しました: ${e}`);
     }
   };
 
-  // TODO const signInWithGuest = async () => {}
+  // TODO ゲストログイン
+  // const signInWithGuest = async () => {}
 
   const logOut = async () => {
     try {
       await signOut(auth);
       toast.success("ログアウトしました");
     } catch (e) {
-      toast.error("ログアウトに失敗しました");
+      toast.error(`ログアウトに失敗しました: ${e}`);
     }
   };
   return {

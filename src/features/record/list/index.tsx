@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useGetWorkingSessions } from "@/hooks/useGetWorkingSessions";
 import { WorkSession } from "@/types/workSession";
 import dayjs from "dayjs";
-// TODO 全体でdayjs 日本語にしたい
 
 import { useNavigate } from "react-router";
 import useTimeFormatter from "@/hooks/useTimeFormatter";
@@ -51,7 +50,6 @@ export const RecodeList = (): React.ReactNode => {
         fullWidth
         className={styles.button}
         onClick={() => {
-          // TODO 記録一覧へ移動
           navigate("/history");
         }}
       >
