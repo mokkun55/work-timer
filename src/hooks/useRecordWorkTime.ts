@@ -19,14 +19,12 @@ export const useRecordWorkTime = () => {
     const userId = currentUser.uid;
     try {
       const workSessionsRef = collection(db, `users/${userId}/work_sessions`);
-      const docRef = await addDoc(workSessionsRef, {
+      await addDoc(workSessionsRef, {
         content,
         duration,
         createdAt: new Date(),
         week,
       });
-      // TODO デバック用後で消す
-      console.log("作業を記録しました id:: ", docRef.id);
     } catch (e) {
       // こちらも
       console.error("作業記録中にエラーが発生しました: ", e);

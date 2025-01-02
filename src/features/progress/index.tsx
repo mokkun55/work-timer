@@ -13,8 +13,6 @@ export const Progress = (): React.ReactNode => {
   const fetchTimes = async () => {
     const goalTime = await getGoalTime();
     const totalTime = await getThisWeekTotalDuration();
-    // TODO 後で消す
-    console.log(goalTime, totalTime);
     if (goalTime == null || totalTime == null) return;
     setGoalTime(goalTime); // 目標時間は時間で保存されている
     setCompleteTime(parseFloat((totalTime / 3600).toFixed(1))); // 完了時間は秒で保存されている <- 時間に変換
