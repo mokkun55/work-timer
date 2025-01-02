@@ -1,5 +1,5 @@
 // import useTimeFormatter from "@/hooks/useTimeFormatter";
-import { Button, Container, FocusTrap, Modal, Progress } from "@mantine/core";
+import { Button, Container, FocusTrap, Modal } from "@mantine/core";
 import styles from "./index.module.scss";
 import { MdModeEdit } from "react-icons/md";
 import { useEffect, useState } from "react";
@@ -88,11 +88,12 @@ export const WorkingModal = ({
             <MdModeEdit className={styles.icon} />
           </div>
         </div>
-        <div className={styles.progressArea}>
+        {/* TODO 暇なときに実装したい */}
+        {/* <div className={styles.progressArea}>
           <h2 className={styles.title}>今週の進捗</h2>
           <p className={styles.time}>11h / 16h</p>
         </div>
-        <Progress value={40} size="xl" radius="xl" />
+        <Progress value={40} size="xl" radius="xl" /> */}
 
         <p className={styles.time}>{formatTime(time, true)}</p>
 
