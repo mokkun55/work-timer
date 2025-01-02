@@ -13,6 +13,7 @@ type Props = {
   isWorking: boolean;
   setIsWorking: (isWorking: boolean) => void;
   workContent: string;
+  setWorkContent: (workContent: string) => void;
 };
 
 export const WorkingModal = ({
@@ -20,6 +21,7 @@ export const WorkingModal = ({
   isWorking,
   setIsWorking,
   workContent,
+  setWorkContent,
 }: Props): React.ReactNode => {
   const [isBreak, setIsBreak] = useState<boolean>(false);
   // 時間は秒で扱う
@@ -43,6 +45,7 @@ export const WorkingModal = ({
     setIsBreak(!isBreak);
   };
 
+  // 終了ボタンが押されたとき
   const handleCloseButtonClick = () => {
     writeRecordTime({
       content: workContent,
@@ -56,6 +59,7 @@ export const WorkingModal = ({
 
     setTime(0);
     setIsWorking(false);
+    setWorkContent("");
     onClose();
     setIsBreak(false);
   };

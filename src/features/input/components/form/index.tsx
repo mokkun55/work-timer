@@ -68,6 +68,7 @@ export const Form = (): React.ReactNode => {
             isWorking={isWorking}
             setIsWorking={setIsWorking}
             workContent={workContent}
+            setWorkContent={setWorkContent}
           />
           <form
             onSubmit={(e) => {
