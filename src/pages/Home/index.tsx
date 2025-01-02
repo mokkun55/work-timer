@@ -5,9 +5,12 @@ import { Progress } from "@/features/progress";
 import AuthGuard from "@/features/auth/components/AuthGuard";
 import { useNavigate } from "react-router";
 import { BaseLayout } from "@/Layouts/BaseLayout";
+import { useState } from "react";
 
 export const Home = (): React.ReactNode => {
   const navigate = useNavigate();
+  const [refresh, setRefresh] = useState<boolean>(false);
+
   return (
     <AuthGuard>
       <BaseLayout>
@@ -15,19 +18,19 @@ export const Home = (): React.ReactNode => {
           {/* 現在の進捗 */}
           <Flex direction="row">
             <Grid.Col span={4}>
-              <Progress />
+              <Progress refresh={refresh} />
             </Grid.Col>
 
             {/* 最近の記録 */}
             <Grid.Col span={8}>
-              <RecodeList />
+              <RecodeList refresh={refresh} />
             </Grid.Col>
           </Flex>
         </Grid>
 
         {/* 記録フォーム */}
         <div>
-          <Form />
+          <Form setRefresh={setRefresh} />
         </div>
 
         {/* 設定画面へ */}

@@ -14,6 +14,7 @@ type Props = {
   setIsWorking: (isWorking: boolean) => void;
   workContent: string;
   setWorkContent: (workContent: string) => void;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const WorkingModal = ({
@@ -22,6 +23,7 @@ export const WorkingModal = ({
   setIsWorking,
   workContent,
   setWorkContent,
+  setRefresh,
 }: Props): React.ReactNode => {
   const [isBreak, setIsBreak] = useState<boolean>(false);
   // 時間は秒で扱う
@@ -62,6 +64,7 @@ export const WorkingModal = ({
     setWorkContent("");
     onClose();
     setIsBreak(false);
+    setRefresh((prev) => !prev);
   };
 
   if (isWorking) {

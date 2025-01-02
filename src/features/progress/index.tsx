@@ -4,7 +4,11 @@ import { useUserSettings } from "@/hooks/useUserSettings";
 import { useEffect, useState } from "react";
 import { useGetWorkingSessions } from "@/hooks/useGetWorkingSessions";
 
-export const Progress = (): React.ReactNode => {
+type Props = {
+  refresh: boolean;
+};
+
+export const Progress = ({ refresh }: Props): React.ReactNode => {
   const { getGoalTime } = useUserSettings();
   const [goalTime, setGoalTime] = useState<number>();
   const { getThisWeekTotalDuration } = useGetWorkingSessions();
@@ -21,7 +25,7 @@ export const Progress = (): React.ReactNode => {
   useEffect(() => {
     fetchTimes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [refresh]);
 
   // TODO goalTimeがnullの場合はスケルトンとか表示したい
   if (goalTime == null || completeTime == null) return null;

@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import { useGetWorkingSessions } from "@/hooks/useGetWorkingSessions";
 import { WorkSession } from "@/types/workSession";
 import dayjs from "dayjs";
-
 import { useNavigate } from "react-router";
 import useTimeFormatter from "@/hooks/useTimeFormatter";
 
-export const RecodeList = (): React.ReactNode => {
+type Props = {
+  refresh: boolean;
+};
+
+export const RecodeList = ({ refresh }: Props): React.ReactNode => {
   const navigate = useNavigate();
 
   const { getThisWeekWorkingSessions } = useGetWorkingSessions();
@@ -23,7 +26,7 @@ export const RecodeList = (): React.ReactNode => {
   useEffect(() => {
     fetchSessions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [refresh]);
 
   // TODO スケルトンとかいれたいねー
   if (!workSessions) {

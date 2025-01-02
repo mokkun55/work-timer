@@ -9,7 +9,11 @@ import { useRecordWorkTime } from "@/hooks/useRecordWorkTime";
 import { useWeekNumber } from "@/hooks/useWeekNumber";
 import toast from "react-hot-toast";
 
-export const Form = (): React.ReactNode => {
+type Props = {
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const Form = ({ setRefresh }: Props): React.ReactNode => {
   const { perseTime } = useTimeFormatter();
   const [inputTime, setInputTime] = useState<string>("");
   const [workContent, setWorkContent] = useState<string>("");
@@ -51,6 +55,7 @@ export const Form = (): React.ReactNode => {
 
     setInputTime("");
     setWorkContent("");
+    setRefresh((prev) => !prev);
   };
 
   return (
@@ -69,6 +74,7 @@ export const Form = (): React.ReactNode => {
             setIsWorking={setIsWorking}
             workContent={workContent}
             setWorkContent={setWorkContent}
+            setRefresh={setRefresh}
           />
           <form
             onSubmit={(e) => {
