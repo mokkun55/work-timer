@@ -35,7 +35,7 @@ export const Progress = ({ refresh }: Props): React.ReactNode => {
     <div className={styles.container}>
       <h2 className={styles.title}>今週の進捗</h2>
       <RingProgress
-        size={250}
+        size={280}
         thickness={12}
         roundCaps
         sections={[{ value: percent, color: "blue" }]}

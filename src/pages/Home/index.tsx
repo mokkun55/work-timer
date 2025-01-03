@@ -1,4 +1,4 @@
-import { Button, Flex, Grid } from "@mantine/core";
+import { Button, Flex } from "@mantine/core";
 import { Form } from "@/features/input/components/form";
 import { RecodeList } from "@/features/record/list";
 import { Progress } from "@/features/progress";
@@ -14,22 +14,22 @@ export const Home = (): React.ReactNode => {
   return (
     <AuthGuard>
       <BaseLayout>
-        <Grid grow h="400px">
+        <Flex direction="column" justify="center" align="center">
           {/* 現在の進捗 */}
           <Flex direction="row">
-            <Grid.Col span={4}>
+            <div>
               <Progress refresh={refresh} />
-            </Grid.Col>
+            </div>
 
             {/* 最近の記録 */}
-            <Grid.Col span={8}>
+            <div>
               <RecodeList refresh={refresh} />
-            </Grid.Col>
+            </div>
           </Flex>
-        </Grid>
+        </Flex>
 
         {/* 記録フォーム */}
-        <div>
+        <div style={{ width: "80%" }}>
           <Form setRefresh={setRefresh} />
         </div>
 
