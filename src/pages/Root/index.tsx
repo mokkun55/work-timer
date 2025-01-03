@@ -57,8 +57,8 @@ export const Root = () => {
           <Button rightSection={<FaArrowRight />} onClick={handleSignClick}>
             今すぐ始める
           </Button>
-          {/* ゲストモード的なのを作ってみたい */}
-          <Button variant="outline">試してみる</Button>
+          {/* TODO ゲストモード的なのを作ってみたい */}
+          {/* <Button variant="outline">試してみる</Button> */}
         </div>
 
         <h1 className={styles.service}>サービスの紹介</h1>
