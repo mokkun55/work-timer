@@ -1,4 +1,3 @@
-// import useTimeFormatter from "@/hooks/useTimeFormatter";
 import { Button, Container, FocusTrap, Modal } from "@mantine/core";
 import styles from "./index.module.scss";
 import { MdModeEdit } from "react-icons/md";
@@ -35,7 +34,7 @@ export const WorkingModal = ({
   const { getNowWeekNumber } = useWeekNumber();
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isWorking && !isBreak) {
       const currentStartTime = startTime ? startTime : Date.now();
       setStartTime(currentStartTime);
