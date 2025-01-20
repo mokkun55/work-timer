@@ -2,7 +2,7 @@
 import { Button, Container, FocusTrap, Modal } from "@mantine/core";
 import styles from "./index.module.scss";
 import { MdModeEdit } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useTimeFormatter from "@/hooks/useTimeFormatter";
 import { useRecordWorkTime } from "@/hooks/useRecordWorkTime";
 import { useWeekNumber } from "@/hooks/useWeekNumber";
@@ -28,22 +28,36 @@ export const WorkingModal = ({
   const [isBreak, setIsBreak] = useState<boolean>(false);
   // 時間は秒で扱う
   const { formatTime } = useTimeFormatter();
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [breakTime, setBreakTime] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
   const { writeRecordTime } = useRecordWorkTime();
   const { getNowWeekNumber } = useWeekNumber();
 
   useEffect(() => {
+    let interval: NodeJS.Timeout;
     if (isWorking && !isBreak) {
-      const interval = setInterval(() => {
-        setTime((prev) => prev + 1);
+      const currentStartTime = startTime ? startTime : Date.now();
+      setStartTime(currentStartTime);
+      interval = setInterval(() => {
+        if (currentStartTime) {
+          setTime(
+            Math.floor((Date.now() - currentStartTime) / 1000) + breakTime
+          );
+        }
       }, 1000);
-
-      return () => clearInterval(interval);
     }
-  }, [isWorking, isBreak]);
+
+    return () => clearInterval(interval);
+  }, [isWorking, isBreak, startTime, breakTime]);
 
   // 休憩ボタンが押されたとき
   const handleBreakButtonClick = () => {
+    if (!isBreak) {
+      setBreakTime(time);
+    } else {
+      setStartTime(Date.now());
+    }
     setIsBreak(!isBreak);
   };
 
@@ -72,6 +86,11 @@ export const WorkingModal = ({
   } else {
     window.onbeforeunload = null;
   }
+
+  const formattedTime = useMemo(
+    () => formatTime(time, true),
+    [time, formatTime]
+  );
 
   // TODO レンダリング最適化する！！ 毎秒再レンダリング走ってる!!
   return (
@@ -102,7 +121,7 @@ export const WorkingModal = ({
         </div>
         <Progress value={40} size="xl" radius="xl" /> */}
 
-        <p className={styles.time}>{formatTime(time, true)}</p>
+        <p className={styles.time}>{formattedTime}</p>
 
         <div className={styles.buttonArea}>
           <Button
